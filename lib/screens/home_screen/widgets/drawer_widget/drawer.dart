@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/config/app_theme_manager.dart';
 import 'package:news_app/core/config/constants.dart';
 
-import 'drawer_item.dart';
-
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
+  final Function onClick;
+
+  const CustomDrawer({super.key, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,27 @@ class CustomDrawer extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const DrawerItem(itemIcon: Icons.list, itemName: "Categories"),
-          const DrawerItem(itemIcon: Icons.settings, itemName: "Settings")
+          TextButton(
+              onPressed: () {
+                onClick();
+              },
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.list,
+                    size: 35,
+                    color: Colors.black,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Categories",
+                    style: Constants.theme.textTheme.titleLarge
+                        ?.copyWith(color: Colors.black),
+                  ),
+                ],
+              ))
         ],
       ),
     );
